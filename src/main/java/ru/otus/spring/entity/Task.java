@@ -1,4 +1,4 @@
-package entity;
+package ru.otus.spring.entity;
 
 public class Task {
 

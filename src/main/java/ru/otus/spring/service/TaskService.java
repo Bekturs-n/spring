@@ -1,23 +1,23 @@
-package service;
+package ru.otus.spring.service;
 
 import au.com.bytecode.opencsv.CSVReader;
-import entity.Task;
-import service.reader.Reader;
+import ru.otus.spring.entity.Task;
+import org.springframework.stereotype.Service;
+import ru.otus.spring.service.utils.reader.Reader;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Service {
+@Service
+public class TaskService {
 
     private final Reader reader;
 
     private String path;
 
-    public Service(Reader reader) {
+    public TaskService(Reader reader) {
         this.reader = reader;
     }
 
@@ -52,7 +52,7 @@ public class Service {
 
     private CSVReader getCSVReader() {
         CSVReader result = null;
-        path = Service.class.getClassLoader().getResource("question.csv").getPath();
+        path = TaskService.class.getClassLoader().getResource("question.csv").getPath();
         try {
             result = reader.getReader(path);
         } catch (IOException e) {

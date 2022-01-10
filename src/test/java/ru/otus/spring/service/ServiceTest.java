@@ -1,4 +1,4 @@
-package service;
+package ru.otus.spring.service;
 
 import au.com.bytecode.opencsv.CSVReader;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import service.reader.Reader;
+import ru.otus.spring.service.utils.reader.Reader;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -23,11 +23,11 @@ class ServiceTest {
     private Reader reader;
     private CSVReader csvReader;
 
-    private Service service;
+    private TaskService service;
 
     @BeforeEach
     void setUp() {
-        service = new Service(reader);
+        service = new TaskService(reader);
         try {
             csvReader = new CSVReader(new FileReader(ServiceTest.class.getClassLoader().getResource("question.csv").getPath()), ';');
         } catch (FileNotFoundException e) {

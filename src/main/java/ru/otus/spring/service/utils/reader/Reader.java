@@ -1,9 +1,8 @@
-package service.reader;
+package ru.otus.spring.service.utils.reader;
 
 import au.com.bytecode.opencsv.CSVReader;
 
 import java.io.IOException;
-import java.nio.file.Path;
 
 public interface Reader {
 

@@ -1,11 +1,12 @@
-package service.reader;
+package ru.otus.spring.service.utils.reader;
 
 import au.com.bytecode.opencsv.CSVReader;
+import org.springframework.stereotype.Component;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Path;
 
+@Component
 public class ReaderImpl implements Reader {
 
     public CSVReader getReader(String path) throws IOException {
