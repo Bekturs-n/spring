@@ -5,25 +5,32 @@ import entity.Task;
 import service.reader.Reader;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Service {
 
     private final Reader reader;
 
-    private static final String path = "C:\\study\\homework\\1lesson\\spring\\src\\main\\resources\\question.csv";
+    private Path path;
 
     public Service(Reader reader) {
         this.reader = reader;
     }
 
     public List<Task> getAllTask() {
-
+        CSVReader read;
         List<Task> list = new ArrayList<>();
+        String[] nextLine;
+
+        if ((read = getCSVReader()) == null){
+            return Collections.emptyList();
+        }
+
         try {
-            String[] nextLine;
-            CSVReader read = reader.getReader(path);
             while ((nextLine = read.readNext()) != null) {
                 Task task = new Task();
                 if (nextLine != null) {
@@ -35,10 +42,23 @@ public class Service {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return list;
     }
 
     public Task getByLine(int line) {
         return null;
     }
+
+    private CSVReader getCSVReader() {
+        CSVReader result = null;
+        path = Paths.get(Service.class.getClassLoader().getResource("question.csv").getPath());
+        try {
+            result = reader.getReader(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }

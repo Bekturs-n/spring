@@ -13,5 +13,7 @@
     <bean id="service" class="service.Service">
         <constructor-arg name="reader" ref="reader"/>
     </bean>
+    <bean id="test" class="service.testLogic.TestImpl">
+    </bean>
 
 </beans>
