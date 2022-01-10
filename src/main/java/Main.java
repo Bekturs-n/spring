@@ -11,7 +11,5 @@ public class Main {
         Service service = context.getBean(Service.class);
         Test test = context.getBean(Test.class);
         test.test(service.getAllTask());
-//        List<Task> tasks = service.getAllTask();
-
     }
 }
