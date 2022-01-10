@@ -15,16 +15,16 @@ public class Service {
 
     private final Reader reader;
 
-    private Path path;
+    private String path;
 
     public Service(Reader reader) {
         this.reader = reader;
     }
 
-    public List<Task> getAllTask() {
+    public List<Task> getAllTasks() {
         CSVReader read;
-        List<Task> list = new ArrayList<>();
         String[] nextLine;
+        List<Task> list = new ArrayList<>();
 
         if ((read = getCSVReader()) == null){
             return Collections.emptyList();
@@ -52,7 +52,7 @@ public class Service {
 
     private CSVReader getCSVReader() {
         CSVReader result = null;
-        path = Paths.get(Service.class.getClassLoader().getResource("question.csv").getPath());
+        path = Service.class.getClassLoader().getResource("question.csv").getPath();
         try {
             result = reader.getReader(path);
         } catch (IOException e) {

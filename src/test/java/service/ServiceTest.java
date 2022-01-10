@@ -1,23 +1,44 @@
 package service;
 
-import entity.Task;
+import au.com.bytecode.opencsv.CSVReader;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import service.reader.ReaderImpl;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import service.reader.Reader;
 
-import java.util.List;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class ServiceTest {
 
-    ReaderImpl reader = new ReaderImpl();
-    Service service;
+    @Mock
+    private Reader reader;
+    private CSVReader csvReader;
+
+    private Service service;
+
+    @BeforeEach
+    void setUp() {
+        service = new Service(reader);
+        try {
+            csvReader = new CSVReader(new FileReader(ServiceTest.class.getClassLoader().getResource("question.csv").getPath()), ';');
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Test
-    void getAllTask() {
-        service = new Service(reader);
-        List<Task> list = service.getAllTask();
-        Task t = list.get(0);
-        assertEquals(t.getQuestion(), "Какое слово всегда звучит неверно?");
+    void getAllTask() throws IOException {
+        when(reader.getReader(anyString())).thenReturn(csvReader);
+//        doReturn(csvReader).when(reader).getReader(anyString());
+        assertEquals(service.getAllTasks().get(0).getQuestion(), "Какое слово всегда звучит неверно?");
     }
 }

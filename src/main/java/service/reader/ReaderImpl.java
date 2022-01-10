@@ -8,7 +8,7 @@ import java.nio.file.Path;
 
 public class ReaderImpl implements Reader {
 
-    public CSVReader getReader(Path path) throws IOException {
+    public CSVReader getReader(String path) throws IOException {
         CSVReader reader = new CSVReader(new FileReader(path.toString()), ';');
         return reader;
     }

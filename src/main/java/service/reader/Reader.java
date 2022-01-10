@@ -7,5 +7,5 @@ import java.nio.file.Path;
 
 public interface Reader {
 
-    CSVReader getReader(Path path) throws IOException;
+    CSVReader getReader(String path) throws IOException;
 }
